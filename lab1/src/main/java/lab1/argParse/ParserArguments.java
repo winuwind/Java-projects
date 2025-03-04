@@ -4,11 +4,13 @@ public class ParserArguments {
     private String typeFile;
     private String typeSort;
     private String nameFile;
+    private String nameOut;
 
     public ParserArguments(String[] args) {
         typeFile = "csv";
         typeSort = "more";
         nameFile = "in.txt";
+        nameOut = "out";
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
             if (i == args.length - 1) {
@@ -19,6 +21,7 @@ public class ParserArguments {
                     case "-s" -> typeSort = args[++i];
                     case "-f" -> typeFile = args[++i];
                     case "-i" -> nameFile = args[++i];
+                    case "-o" -> nameOut = args[++i];
                     default -> System.out.println("Unknown argument " + arg);
                 }
             }
@@ -35,5 +38,9 @@ public class ParserArguments {
 
     public String getNameFile() {
         return nameFile;
+    }
+
+    public String getNameOut() {
+        return nameOut;
     }
 }
