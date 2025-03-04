@@ -4,6 +4,7 @@ import lab1.intClass.IntClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class WordStatistic {
@@ -15,7 +16,7 @@ public class WordStatistic {
 
     public void addWord(String word) {
         IntClass defaultValue = new IntClass();
-        dictionary.put(word, dictionary.getOrDefault(word, defaultValue).plus(1));
+        dictionary.put(word.toLowerCase(), dictionary.getOrDefault(word.toLowerCase(), defaultValue).plus(1));
     }
 
     public ArrayList<Map.Entry<String, IntClass>> getEntry() {
