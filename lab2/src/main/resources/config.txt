@@ -1,0 +1,9 @@
++ lab2.Command.Plus.PlusCommand
+- lab2.Command.Minus.MinusCommand
+* lab2.Command.Multiplication.MultiplicationCommand
+/ lab2.Command.Division.DivisionCommand
+SQRT lab2.Command.Sqrt.SqrtCommand
+PUSH lab2.Command.Push.PushCommand
+POP lab2.Command.Pop.PopCommand
+DEFINE lab2.Command.Define.DefineCommand
+PRINT lab2.Command.Print.PrintCommand
