@@ -5,7 +5,7 @@ import lab2.Context.ContextClass;
 
 public class PushCommand extends AbstractCommand {
     public PushCommand(ContextClass context) {
-        super(context, "POP");
+        super(context, "PUSH");
     }
 
     @Override
