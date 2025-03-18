@@ -34,7 +34,7 @@ public class Calculator {
                 for (String i : list) {
                     builder.append(i).append(" ");
                 }
-                logger.info("Command: \"" + builder + "\"");
+                logger.info("Command: " + builder);
                 if (list.length == 0 || list[0].equals("exit")) {
                     break;
                 }
