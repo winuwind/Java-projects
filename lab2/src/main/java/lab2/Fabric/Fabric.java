@@ -55,6 +55,6 @@ public class Fabric {
     }
 
     public String get(String key){
-        return map.get(key);
+        return map.getOrDefault(key, "");
     }
 }
