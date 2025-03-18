@@ -9,17 +9,10 @@ public class PushCommand extends AbstractCommand {
     }
 
     @Override
-    public void foo(String[] args) throws Exception {
+    public void exec(String[] args) throws Exception {
         logger.info("Before PUSH");
         printStack();
-        if (args.length != 2) {
-            StringBuilder builder = new StringBuilder();
-            for(String i: args){
-                builder.append(i).append(" ");
-            }
-            logger.severe("command: " + builder.toString() + "\nPUSH must have 2 arguments");
-            throw new Exception("Wrong number of arguments");
-        }
+        checkArgs(args, 2);
         try {
             if (context.get(args[1]) == Double.NEGATIVE_INFINITY) {
                 context.getStack().push(Double.parseDouble(args[1]));
@@ -31,12 +24,6 @@ public class PushCommand extends AbstractCommand {
             System.out.println(exception.getMessage());
             throw new NumberFormatException(exception.getMessage());
         }
-        StringBuilder builder = new StringBuilder();
-        for(String i: args){
-            builder.append(i).append(" ");
-        }
-        logger.info("command: \"" + builder.toString() + "\" is successfully completed");
-        logger.info("After PUSH");
-        printStack();
+        writeLogs(args, 2);
     }
 }

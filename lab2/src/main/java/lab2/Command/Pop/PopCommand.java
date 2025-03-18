@@ -9,27 +9,11 @@ public class PopCommand extends AbstractCommand {
     }
 
     @Override
-    public void foo(String[] args) throws Exception {
+    public void exec(String[] args) throws Exception {
         logger.info("Before POP");
         printStack();
-        if (context.getStack().empty()) {
-            StringBuilder builder = new StringBuilder();
-            for(String i: args){
-                builder.append(i).append(" ");
-            }
-            logger.severe("command: " + builder.toString() + "\nStack is empty right now");
-            throw new Exception("Stack is empty");
-        }
+        checkStack(args);
         double x = context.getStack().pop();
-        if (args.length != 1) {
-            logger.warning("So many arguments for POP, but command completed");
-        }
-        StringBuilder builder = new StringBuilder();
-        for(String i: args){
-            builder.append(i).append(" ");
-        }
-        logger.info("command: \"" + builder.toString() + "\" is successfully completed");
-        logger.info("After POP");
-        printStack();
+        writeLogs(args, 1);
     }
 }

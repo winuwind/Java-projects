@@ -33,23 +33,23 @@ public class CommandsTests {
         //Test with wrong number of arguments
         String[] push_args1 = new String[]{"PUSH", "11", "13"};
         assertThrows(Exception.class, () ->
-                cmd.foo(push_args1),
+                cmd.exec(push_args1),
                 "При передачи неправильного количества аргументов должна быть ошибка");
 
         //Test with non-numeric argument
         String[] push_args2 = new String[]{"PUSH", "z"};
         assertThrows(NumberFormatException.class, () ->
-                        cmd.foo(push_args2),
+                        cmd.exec(push_args2),
                 "При передачи нечислового значения должна быть ошибка");
 
         //Test with non-numeric argument from context
         String[] push_args3 = new String[]{"PUSH", "a"};
-        cmd.foo(push_args3);
+        cmd.exec(push_args3);
         assertEquals(context.get("a"), context.getStack().peek());
 
         //Test with numeric argument
         String[] push_args4 = new String[]{"PUSH", "11.231"};
-        cmd.foo(push_args4);
+        cmd.exec(push_args4);
         assertEquals(11.231, context.getStack().peek());
     }
 
@@ -60,7 +60,7 @@ public class CommandsTests {
         //Test with empty stack
         String[] pop_args1 = new String[]{"POP"};
         assertThrows(Exception.class, () ->
-                cmd.foo(pop_args1),
+                cmd.exec(pop_args1),
                 "При вызове функции для пустого стека должна быть ошибка");
 
         context.getStack().push(11.2);
@@ -68,14 +68,14 @@ public class CommandsTests {
 
         //Test with wrong number of arguments
         String[] pop_args2 = new String[]{"POP", "11", "13"};
-        cmd.foo(pop_args2);
+        cmd.exec(pop_args2);
         assertEquals(11.2, context.getStack().peek());
 
         context.getStack().push(15.1);
 
         //Test with right arguments
         String[] pop_args3 = new String[]{"POP"};
-        cmd.foo(pop_args3);
+        cmd.exec(pop_args3);
         assertEquals(11.2, context.getStack().peek());
     }
 
@@ -86,19 +86,19 @@ public class CommandsTests {
         //Test with empty stack
         String[] print_args1 = new String[]{"PRINT"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(print_args1),
+                        cmd.exec(print_args1),
                 "При вызове функции для пустого стека должна быть ошибка");
 
         context.getStack().push(11.2);
 
         //Test with wrong number of arguments
         String[] print_args2 = new String[]{"PRINT", "11", "13"};
-        cmd.foo(print_args2);
+        cmd.exec(print_args2);
         assertEquals(11.2, context.getStack().peek());
 
         //Test with right arguments
         String[] print_args3 = new String[]{"POP"};
-        cmd.foo(print_args3);
+        cmd.exec(print_args3);
         assertEquals(11.2, context.getStack().peek());
     }
 
@@ -109,23 +109,23 @@ public class CommandsTests {
         //Test with wrong number of arguments
         String[] define_args1 = new String[]{"DEFINE", "11", "13", "21"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(define_args1),
+                        cmd.exec(define_args1),
                 "При передачи неправильного количества аргументов должна быть ошибка");
 
         //Test with non-numeric argument
         String[] define_args2 = new String[]{"PUSH", "z", "q"};
         assertThrows(NumberFormatException.class, () ->
-                        cmd.foo(define_args2),
+                        cmd.exec(define_args2),
                 "При передачи нечислового значения должна быть ошибка");
 
         //Test with define numeric
         String[] define_args3 = new String[]{"DEFINE", "111", "13.2"};
-        cmd.foo(define_args3);
+        cmd.exec(define_args3);
         assertEquals(13.2, context.get("111"));
 
         //Test with define numeric
         String[] define_args4 = new String[]{"DEFINE", "d", "13.2"};
-        cmd.foo(define_args4);
+        cmd.exec(define_args4);
         assertEquals(13.2, context.get("d"));
     }
 
@@ -136,7 +136,7 @@ public class CommandsTests {
         //Test with empty stack
         String[] minus_args1 = new String[]{"-"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(minus_args1),
+                        cmd.exec(minus_args1),
                 "При вызове с пустым стеком должна быть ошибка");
 
         context.getStack().push(11.2);
@@ -144,7 +144,7 @@ public class CommandsTests {
         //Test with only one numeric on stack
         String[] minus_args2 = new String[]{"-"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(minus_args2),
+                        cmd.exec(minus_args2),
                 "При вызове с одним числом на стеке должна быть ошибка");
         //Stack must preserve its state
         assertEquals(11.2, context.getStack().peek());
@@ -153,7 +153,7 @@ public class CommandsTests {
 
         //Test with wrong number of arguments
         String[] minus_args3 = new String[]{"-", "x"};
-        cmd.foo(minus_args3);
+        cmd.exec(minus_args3);
         assertEquals(2.0, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -161,7 +161,7 @@ public class CommandsTests {
 
         //Test with right arguments
         String[] minus_args4 = new String[]{"-"};
-        cmd.foo(minus_args4);
+        cmd.exec(minus_args4);
         assertEquals(-1.0, context.getStack().peek());
         assertEquals(1, context.getStack().size());
     }
@@ -173,7 +173,7 @@ public class CommandsTests {
         //Test with empty stack
         String[] plus_args1 = new String[]{"+"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(plus_args1),
+                        cmd.exec(plus_args1),
                 "При вызове с пустым стеком должна быть ошибка");
 
         context.getStack().push(11.2);
@@ -181,7 +181,7 @@ public class CommandsTests {
         //Test with only one numeric on stack
         String[] plus_args2 = new String[]{"+"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(plus_args2),
+                        cmd.exec(plus_args2),
                 "При вызове с одним числом на стеке должна быть ошибка");
         //Stack must preserve its state
         assertEquals(11.2, context.getStack().peek());
@@ -190,7 +190,7 @@ public class CommandsTests {
 
         //Test with wrong number of arguments
         String[] plus_args3 = new String[]{"+", "x"};
-        cmd.foo(plus_args3);
+        cmd.exec(plus_args3);
         assertEquals(24.4, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -198,7 +198,7 @@ public class CommandsTests {
 
         //Test with right arguments
         String[] plus_args4 = new String[]{"+"};
-        cmd.foo(plus_args4);
+        cmd.exec(plus_args4);
         assertEquals(25.4, context.getStack().peek());
         assertEquals(1, context.getStack().size());
     }
@@ -210,7 +210,7 @@ public class CommandsTests {
         //Test with empty stack
         String[] multiplication_args1 = new String[]{"*"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(multiplication_args1),
+                        cmd.exec(multiplication_args1),
                 "При вызове с пустым стеком должна быть ошибка");
 
         context.getStack().push(11.2);
@@ -218,7 +218,7 @@ public class CommandsTests {
         //Test with only one numeric on stack
         String[] multiplication_args2 = new String[]{"*"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(multiplication_args2),
+                        cmd.exec(multiplication_args2),
                 "При вызове с одним числом на стеке должна быть ошибка");
         //Stack must preserve its state
         assertEquals(11.2, context.getStack().peek());
@@ -227,7 +227,7 @@ public class CommandsTests {
 
         //Test with wrong number of arguments
         String[] multiplication_args3 = new String[]{"*", "x"};
-        cmd.foo(multiplication_args3);
+        cmd.exec(multiplication_args3);
         assertEquals(147.83999999999997, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -235,7 +235,7 @@ public class CommandsTests {
 
         //Test with right arguments
         String[] multiplication_args4 = new String[]{"*"};
-        cmd.foo(multiplication_args4);
+        cmd.exec(multiplication_args4);
         assertEquals(221.75999999999996, context.getStack().peek());
         assertEquals(1, context.getStack().size());
     }
@@ -247,7 +247,7 @@ public class CommandsTests {
         //Test with empty stack
         String[] division_args1 = new String[]{"/"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(division_args1),
+                        cmd.exec(division_args1),
                 "При вызове с пустым стеком должна быть ошибка");
 
         context.getStack().push(11.0);
@@ -255,7 +255,7 @@ public class CommandsTests {
         //Test with only one numeric on stack
         String[] division_args2 = new String[]{"/"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(division_args2),
+                        cmd.exec(division_args2),
                 "При вызове с одним числом на стеке должна быть ошибка");
         //Stack must preserve its state
         assertEquals(11.0, context.getStack().peek());
@@ -264,7 +264,7 @@ public class CommandsTests {
 
         //Test with wrong number of arguments
         String[] division_args3 = new String[]{"/", "x"};
-        cmd.foo(division_args3);
+        cmd.exec(division_args3);
         assertEquals(1.2, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -272,7 +272,7 @@ public class CommandsTests {
 
         //Test with right arguments
         String[] division_args4 = new String[]{"/"};
-        cmd.foo(division_args4);
+        cmd.exec(division_args4);
         assertEquals(4.0, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -282,7 +282,7 @@ public class CommandsTests {
         //Test with division by zero
         String[] division_args5 = new String[]{"/"};
         assertThrows(Exception.class, () ->
-                cmd.foo(division_args5),
+                cmd.exec(division_args5),
                 "При делении на 0 должна быть ошибка");
         //Stack must preserve its state
         assertEquals(3, context.getStack().size());
@@ -299,14 +299,14 @@ public class CommandsTests {
         //Test with empty stack
         String[] sqrt_args1 = new String[]{"sqrt"};
         assertThrows(Exception.class, () ->
-                        cmd.foo(sqrt_args1),
+                        cmd.exec(sqrt_args1),
                 "При вызове с пустым стеком должна быть ошибка");
 
         context.getStack().push(9.0);
 
         //Test with wrong number of arguments
         String[] sqrt_args3 = new String[]{"sqrt", "x"};
-        cmd.foo(sqrt_args3);
+        cmd.exec(sqrt_args3);
         assertEquals(3.0, context.getStack().peek());
         assertEquals(1, context.getStack().size());
 
@@ -314,7 +314,7 @@ public class CommandsTests {
 
         //Test with right arguments
         String[] sqrt_args4 = new String[]{"sqrt"};
-        cmd.foo(sqrt_args4);
+        cmd.exec(sqrt_args4);
         assertEquals(0.7, context.getStack().peek());
         assertEquals(2, context.getStack().size());
 
@@ -323,7 +323,7 @@ public class CommandsTests {
         //Test sqrt with negative number
         String[] sqrt_args5 = new String[]{"sqrt"};
         assertThrows(ArithmeticException.class, () ->
-                        cmd.foo(sqrt_args5),
+                        cmd.exec(sqrt_args5),
                 "При вычислении корня из отрицательного числа должна быть ошибка");
         //Stack must preserve its state
         assertEquals(3, context.getStack().size());

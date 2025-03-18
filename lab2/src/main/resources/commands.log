@@ -1,5 +1,5 @@
-мар. 15, 2025 3:03:40 PM lab2.Command.Division.DivisionCommand foo
+мар. 18, 2025 11:06:01 AM lab2.Command.Division.DivisionCommand exec
 SEVERE: div 0.0 0.0, impossible operation
-мар. 15, 2025 3:03:40 PM lab2.Command.Pop.PopCommand foo
+мар. 18, 2025 11:06:01 AM lab2.Command.AbstractCommand checkStack
 SEVERE: command: POP 
 Stack is empty right now

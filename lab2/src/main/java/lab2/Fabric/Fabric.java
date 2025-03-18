@@ -54,7 +54,7 @@ public class Fabric {
         return (AbstractCommand) clazz.getDeclaredConstructor(ContextClass.class).newInstance(context);
     }
 
-    public String get(String key){
+    public String get(String key) {
         return map.getOrDefault(key, "");
     }
 }
