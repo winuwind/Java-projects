@@ -1,0 +1,14 @@
+Time: 16-04-2025 22:15:01;
+Dealer: 42;
+Car:
+	Name Car: BMW
+	Id: 10
+		Body:
+			Name: Body
+			Id: 12
+		Engine:
+			Name: 
+			Id: 11
+		Accessories:
+			- Name: Hi-Fi
+			  Id: 13
