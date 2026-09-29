@@ -1,1 +1,3 @@
-# 23210-Styvrin-Java
+# Java-Projects
+
+Учебные проекты, написанные на Java

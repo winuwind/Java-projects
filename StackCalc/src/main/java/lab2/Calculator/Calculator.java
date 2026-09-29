@@ -114,7 +114,7 @@ public class Calculator {
         Scanner scanner = new Scanner(System.in);
         Level level = Level.WARNING;
         if (args.length == 0 || args.length > 3) {
-            System.out.println("Usage: java Calculator <configFile> <inFile = stdin> <level = WARNING>");
+            System.out.println("Usage: java Calculator <inFile = stdin> <level = WARNING>");
             return;
         } else if (args.length == 2) {
             if (!args[1].equals("stdin")) {
